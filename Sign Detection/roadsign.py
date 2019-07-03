@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from scipy.stats import itemfreq
+import math
 
 
 def get_dominant_color(image, n_colors):
@@ -48,7 +49,9 @@ while success and not clicked:
         if y > r and x > r:
             square = frame[y-r:y+r, x-r:x+r]
             dominant_color = get_dominant_color(square, 2)
-            if dominant_color[2] > 100:
+            if dominant_color[2] > 100 and dominant_color[2] > 100:
+                print("SLOW")
+            elif dominant_color[2] > 60 :
                 zone_0 = square[square.shape[0]*3//8:square.shape[0]
                                 * 5//8, square.shape[1]*1//8:square.shape[1]*3//8]
                 cv2.imshow('Zone0', zone_0)
@@ -64,13 +67,14 @@ while success and not clicked:
                 cv2.imshow('Zone2', zone_2)
                 zone_2_color = get_dominant_color(zone_2, 2)
                 if zone_1_color[0] < 125:
-                    if sum(zone_0_color) > sum(zone_2_color):
+                    if math.isclose(sum(zone_0_color),sum(zone_2_color), abs_tol=2):
+                        print("STOP")
+                    elif sum(zone_0_color) > sum(zone_2_color):
                         print("LEFT")
-                    else:
+                    elif sum(zone_0_color) < sum(zone_2_color):
                         print("RIGHT")
-                else:
-                    if sum(zone_1_color) > sum(zone_0_color) and sum(zone_1_color) > sum(zone_2_color):
-                        print("FORWARD")
+                elif sum(zone_1_color) > sum(zone_0_color) and sum(zone_1_color) > sum(zone_2_color):
+                    print("FORWARD")
                     
             else:
                 print("N/A")
