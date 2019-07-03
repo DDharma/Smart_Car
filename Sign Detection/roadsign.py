@@ -75,6 +75,10 @@ while success and not clicked:
                         print("RIGHT")
                 elif sum(zone_1_color) > sum(zone_0_color) and sum(zone_1_color) > sum(zone_2_color):
                     print("FORWARD")
+<<<<<<< HEAD
+=======
+                
+>>>>>>> master
                     
             else:
                 print("N/A")
