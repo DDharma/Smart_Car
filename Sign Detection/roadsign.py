@@ -64,13 +64,15 @@ while success and not clicked:
                 cv2.imshow('Zone2', zone_2)
                 zone_2_color = get_dominant_color(zone_2, 2)
                 if zone_1_color[0] < 125:
-                    if sum(zone_0_color) > sum(zone_2_color):
+                    if math.isclose(sum(zone_0_color),sum(zone_2_color), abs_tol=2):
+                        print("STOP")
+                    elif sum(zone_0_color) > sum(zone_2_color):
                         print("LEFT")
-                    else:
+                    elif sum(zone_0_color) < sum(zone_2_color):
                         print("RIGHT")
-                else:
-                    if sum(zone_1_color) > sum(zone_0_color) and sum(zone_1_color) > sum(zone_2_color):
-                        print("FORWARD")
+                elif sum(zone_1_color) > sum(zone_0_color) and sum(zone_1_color) > sum(zone_2_color):
+                    print("FORWARD")
+                
                     
             else:
                 print("N/A")
