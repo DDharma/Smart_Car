@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 from scipy.stats import itemfreq
 import math
+from mqtt import MqttConnector
+
+import time   #for delay functions 
 
 
 def get_dominant_color(image, n_colors):
@@ -20,7 +23,9 @@ def onMouse(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONUP:
         clicked = True
 
-
+mqtt_client = MqttConnector('localhost',1883)
+mqtt_topic = 'control'
+#cameraCapture = cv2.VideoCapture('http://192.168.137.123:8080/video') 
 cameraCapture = cv2.VideoCapture(0) 
 cv2.namedWindow('camera')
 cv2.setMouseCallback('camera', onMouse)
@@ -49,9 +54,8 @@ while success and not clicked:
         if y > r and x > r:
             square = frame[y-r:y+r, x-r:x+r]
             dominant_color = get_dominant_color(square, 2)
-            if dominant_color[2] > 100 and dominant_color[2] > 100:
-                print("SLOW")
-            elif dominant_color[2] > 60 :
+
+            if dominant_color[2] > 150 :
                 zone_0 = square[square.shape[0]*3//8:square.shape[0]
                                 * 5//8, square.shape[1]*1//8:square.shape[1]*3//8]
                 cv2.imshow('Zone0', zone_0)
@@ -68,22 +72,34 @@ while success and not clicked:
                 zone_2_color = get_dominant_color(zone_2, 2)
                 if zone_1_color[0] < 125:
                     if math.isclose(sum(zone_0_color),sum(zone_2_color), abs_tol=2):
+                        mqtt_client.sendMsg(mqtt_topic,'S')
                         print("STOP")
+                        
                     elif sum(zone_0_color) > sum(zone_2_color):
+                        mqtt_client.sendMsg(mqtt_topic,'L')
                         print("LEFT")
+                        
                     elif sum(zone_0_color) < sum(zone_2_color):
+                        mqtt_client.sendMsg(mqtt_topic,'R')
                         print("RIGHT")
+                        
                 elif sum(zone_1_color) > sum(zone_0_color) and sum(zone_1_color) > sum(zone_2_color):
+                    mqtt_client.sendMsg(mqtt_topic,'F')
                     print("FORWARD")
+                    
+                    
+                    
                     
             else:
                 print("N/A")
+                mqtt_client.sendMsg(mqtt_topic,'N')
                 
 
         for i in circles[0, :]:
             cv2.circle(frame, (i[0], i[1]), i[2], (0, 255, 0), 2)
-            cv2.circle(frame, (i[0], i[1]), 2, (0, 0, 255), 3)
+            cv2.circle(frame, (i[0], i[1]), 2, (0, 0, 255), 3)      
     cv2.imshow('camera', frame)
+    
 
 
 cv2.destroyAllWindows()
