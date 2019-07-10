@@ -1,9 +1,9 @@
-#include <ESP8266WiFi.h>
+ #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #define LED D0
-const char* ssid = "<Wifi-SSID>";
-const char* password = "Wifi-Password>";
-const char* mqtt_server = "<IP of server>";
+const char* ssid = "Shivangi";
+const char* password = "AN720000";
+const char* mqtt_server = "192.168.137.1";
 int DL1 = D1;
 int DL2 = D2;
 int DR1 = D3;
@@ -44,6 +44,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print(topic);
   Serial.print("] ");
   for (int i = 0; i < length; i++) {
+    //Serial.print(i);
     Serial.print((char)payload[i]);
   }
   Serial.println();
@@ -77,10 +78,13 @@ void setup() {
   pinMode(DL2, OUTPUT);
   pinMode(DR1, OUTPUT);
   pinMode(DR2, OUTPUT);
-  digitalWrite (DL1, LOW);
+  digitalWrite (DL1, HIGH);
   digitalWrite (DL2, LOW);
-  digitalWrite (DR1, LOW);
+  digitalWrite (DR1, HIGH);
   digitalWrite (DR2, LOW);
+  analogWrite(D6,650);
+  analogWrite(D7,650);
+  
   Serial.println("Hi!, I am Arduino,\ncurrently setting up plz wait!!");
   setup_wifi();
   client.setServer(mqtt_server, 1883);
@@ -97,25 +101,37 @@ void loop() {
 
 
 void controller(char command) {
+  Serial.println("Command");
+  Serial.println(command);
   if (command == 'F') {
+    Serial.println("Forward");
     digitalWrite (DL1, HIGH);
     digitalWrite (DL2, LOW);
     digitalWrite (DR1, HIGH);
     digitalWrite (DR2, LOW);
   }
   else if (command == 'R') {
+    Serial.println("Right");
     digitalWrite (DL1, HIGH);
     digitalWrite (DL2, LOW);
+    delay(1000);
     digitalWrite (DR1, LOW);
     digitalWrite (DR2, HIGH);
+    delay(1000);
+
   }
   else if (command == 'L') {
+    Serial.println("Left");
     digitalWrite (DL1, LOW);
     digitalWrite (DL2, HIGH);
+    delay(1000);
     digitalWrite (DR1, HIGH);
     digitalWrite (DR2, LOW);
+    delay(1000);
   }
+  
   else if (command == 'S') {
+    Serial.println("Stop");
     digitalWrite (DL1, LOW);
     digitalWrite (DL2, LOW);
     digitalWrite (DR1, LOW);
@@ -123,6 +139,7 @@ void controller(char command) {
 
   }
   else if (command == 'N') {
+    Serial.println("NaN");
     digitalWrite (DL1, HIGH);
     digitalWrite (DL2, LOW);
     digitalWrite (DR1, HIGH);

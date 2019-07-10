@@ -25,7 +25,7 @@ def onMouse(event, x, y, flags, param):
 
 mqtt_client = MqttConnector('localhost',1883)
 mqtt_topic = 'control'
-#cameraCapture = cv2.VideoCapture('http://192.168.137.123:8080/video') 
+#cameraCapture = cv2.VideoCapture('http://192.168.137.60:8080/video') 
 cameraCapture = cv2.VideoCapture(0) 
 cv2.namedWindow('camera')
 cv2.setMouseCallback('camera', onMouse)
@@ -55,7 +55,7 @@ while success and not clicked:
             square = frame[y-r:y+r, x-r:x+r]
             dominant_color = get_dominant_color(square, 2)
 
-            if dominant_color[2] > 150 :
+            if dominant_color[2] > 60 :
                 zone_0 = square[square.shape[0]*3//8:square.shape[0]
                                 * 5//8, square.shape[1]*1//8:square.shape[1]*3//8]
                 cv2.imshow('Zone0', zone_0)
@@ -71,7 +71,7 @@ while success and not clicked:
                 cv2.imshow('Zone2', zone_2)
                 zone_2_color = get_dominant_color(zone_2, 2)
                 if zone_1_color[0] < 125:
-                    if math.isclose(sum(zone_0_color),sum(zone_2_color), abs_tol=2):
+                    if math.isclose(sum(zone_0_color),sum(zone_2_color), abs_tol=10):
                         mqtt_client.sendMsg(mqtt_topic,'S')
                         print("STOP")
                         
