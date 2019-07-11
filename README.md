@@ -1,5 +1,5 @@
 # Smart Car
-A prototype of Google car which is smart enough to avoid obstacles, understand road signs and perform according!
+A prototype of Google car which is smart enough to understand road signs and perform according!
 
 **THE PROJECT IS A RESULT OF JOINT EFFORTS OF:**
 
