@@ -32,4 +32,4 @@ First of all, circles are detected from the background, next three zones are mad
 
 ## Wired OpenCV Model
 - Using server.server library, the detected sign was printed on the serial monitor on connected port.
-- Then the output was read by the node and the speed of motors was thus controlled.([refer] (https://github.com/DDharma/Smart_Car/tree/master/OpenCV_Wired))
+- Then the output was read by the node and the speed of motors was thus controlled.([refer](https://github.com/DDharma/Smart_Car/tree/master/OpenCV_Wired))
