@@ -26,8 +26,8 @@ A prototype of Google car which is smart enough to avoid obstacles, understand r
 First of all, circles are detected from the background, next three zones are made inside the circle for detecting the sign. The dominant color of the zones are found and the predicted sign is returned. ([refer](https://github.com/DDharma/Smart_Car/tree/master/Sign%20Detection/sign_detection.py))
 
 ## Wireless OpenCV Model
-- The MQTT server is set up. ([refer] (https://github.com/DDharma/Smart_Car/tree/master/OpenCV_Wireless/mqtt.py))
-- The code for sending the signal through MQTT is added to the sign detection code explained above. ([refer] (https://github.com/DDharma/Smart_Car/tree/master/OpenCV_Wireless/sign_detection.py))
+- The MQTT server is set up. ([refer](https://github.com/DDharma/Smart_Car/tree/master/OpenCV_Wireless/mqtt.py))
+- The code for sending the signal through MQTT is added to the sign detection code explained above. ([refer](https://github.com/DDharma/Smart_Car/tree/master/OpenCV_Wireless/sign_detection.py))
 - The nodeMCU receives the signal sent by the server and then the micro-controller performs accordingly.
 
 ## Wired OpenCV Model
