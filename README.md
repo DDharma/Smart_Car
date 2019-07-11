@@ -10,7 +10,7 @@ A prototype of Google car which is smart enough to avoid obstacles, understand r
 - [Abhishek Soni](https://github.com/rockstarabhii)
 
 # Sign Detection
-> The project has been made by three ways:
+The project has been made by three ways:
 - CNN Model
 - Wireless openCV model
 - Wired openCV model
