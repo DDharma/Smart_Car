@@ -16,9 +16,9 @@ A prototype of Google car which is smart enough to avoid obstacles, understand r
 - Wired openCV model
 
 # CNN Model
-- Test and train data is generated through openCV and ROI(region of interest) is created, desired image is extracted and file is saved in same mode/directory as of file.([refer](https://github.com/DDharma/Smart_Car/CNN_&_OpenCv_Model/Builing.py))
-- Then we created a 2 layered convolution neural network, with a fully connected layer and then the output layer.Then we use data   augmentation to fit data into the model, through model.fit_generater. Then we saved the model by model_json. (refer CNN_&_OpenCv_Model/CNN_model.py)
-- We loaded all the weights from the CNN_model file and created a dictionary of the six classes: forward, stop, left, right, slow and danger. (refer CNN_&_OpenCv_Model/Final_Prediction.py).
+- Test and train data is generated through openCV and ROI(region of interest) is created, desired image is extracted and file is saved in same mode/directory as of file.([refer](https://github.com/DDharma/Smart_Car/tree/master/CNN_%26_OpenCv_Model/Builing.py))
+- Then we created a 2 layered convolution neural network, with a fully connected layer and then the output layer.Then we use data   augmentation to fit data into the model, through model.fit_generater. Then we saved the model by model_json. ([refer](https://github.com/DDharma/Smart_Car/tree/master/CNN_%26_OpenCv_Model/CNN_Model.py))
+- We loaded all the weights from the CNN_model file and created a dictionary of the six classes: forward, stop, left, right, slow and danger. ([refer](https://github.com/DDharma/Smart_Car/tree/master/CNN_%26_OpenCv_Model/Final_Prediction.py).
 - MQTT Server was set-up and the detected sign was sent to the node using the paho MQTT library.
 - The nodeMCU code is uploded to the micro-controller and thus, the program is executed.
 
